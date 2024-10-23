@@ -12,11 +12,10 @@ fn sort(comptime T: type, allocator: std.mem.Allocator, comptime input: []const 
         const key = output[j];
         var i: isize = @intCast(j - 1);
         while (i >= 0 and output[@intCast(i)] > key) {
-            output[@as(usize, @intCast(i)) + 1] = output[@intCast(i)];
-            i = @intCast(i - 1);
+            output[@intCast(i + 1)] = output[@intCast(i)];
+            i = i - 1;
         }
-        const idx: usize = @intCast(i + 1);
-        output[idx] = key;
+        output[@intCast(i + 1)] = key;
     }
 
     return output;
